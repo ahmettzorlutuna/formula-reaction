@@ -51,9 +51,14 @@ p{
     background: red;
 }
 
+.isWaiting{
+    background: rgb(196, 163, 63);
+}
+
 .isReady{
     background: rgb(196, 163, 63);
 }
+
 
 @media only screen and (max-width: 600px) {
 h1{
