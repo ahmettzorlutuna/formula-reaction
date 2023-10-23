@@ -1,10 +1,8 @@
 <template>
   <h1>Welcome to reaction test!</h1>
-  <Block v-if="isWaiting" @click="start" style="cursor: pointer;"/>
-  <!-- <Block v-if="isReady" style="cursor: pointer;"/> -->
   <Block v-if="isPlaying" :class="{ isPlaying: isPlaying}" :delay="delay" style="cursor: pointer;"/>
-
-  <!-- <Block :delay="delay" @click="start" :class="{ isPlaying: isPlaying}"/> -->
+  <Block @click="start" style="cursor: pointer;" :class="{isReady : isPlaying}"/>
+  <Block v-if="isReady" style="cursor: pointer;" :class="{isWaiting: isPlaying}"/>
 </template>
 
 <script>
@@ -18,16 +16,14 @@ export default {
   methods: {
     start(){
       this.isPlaying= true
-      this.isWaiting= false
       this.isReady = true
-      this.delay = 2000 + Math.random() * 3000; 
+      this.delay = 2000 + Math.random() * 3000;
       console.log(this.delay)
     }
   },
   data() {
     return {
       isPlaying: false,
-      isWaiting: true,
       isReady: false,
       delay: null
     }
