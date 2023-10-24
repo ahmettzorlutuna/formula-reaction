@@ -1,8 +1,8 @@
 <template>
   <h1>Welcome to reaction test!</h1>
-  <Block v-if="isPlaying" :class="{ isPlaying: isPlaying}" :delay="delay" style="cursor: pointer;"/>
-  <Block @click="start" style="cursor: pointer;" :class="{isReady : isPlaying}"/>
-  <Block v-if="isReady" style="cursor: pointer;" :class="{isWaiting: isPlaying}"/>
+  <Block v-if="isReady" @click="start" style="cursor: pointer;" title="asd" />
+  <Block v-if="isWaiting" :updated="isPlaying" style="cursor: pointer;" title="asd2" />
+  <Block v-if="isPlaying" :class="{ isPlaying: isPlaying}" :delay="delay" style="cursor: pointer;" title="resulttt" />
 </template>
 
 <script>
@@ -16,7 +16,8 @@ export default {
   methods: {
     start(){
       this.isPlaying= true
-      this.isReady = true
+      this.isReady = false
+      this.isWaiting = true
       this.delay = 2000 + Math.random() * 3000;
       console.log(this.delay)
     }
@@ -24,10 +25,11 @@ export default {
   data() {
     return {
       isPlaying: false,
-      isReady: false,
+      isReady: true,
+      isWaiting: false,
       delay: null
     }
-  },
+  }
 }
 </script>
 
