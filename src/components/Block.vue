@@ -1,30 +1,40 @@
 <template>
-  <div class="centered-container" ref="container" v-if="showBlock">
+  <div class="centered-container" v-if="showBlock" @click="stopTimer">
     <div class="block">
-        <h1>Reaction Time Test!</h1>
-        <p>Improve your reflexes</p>
+        <h1>Reaction time test</h1>
+        <p>{{title}}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    props: ['delay'],
+    props: ['delay','title'],
     data(){
         return{
-            showBlock: false
+            showBlock: false,
+            timer: null,
+            reactionTime: 0
         }
     },
     mounted() {
-        console.log("mounted block component")
+        // console.log("mounted")
         setTimeout(() => {
             this.showBlock = true
-            console.log(this.delay)
+            this.startTimer()
         },this.delay)
     },
-    updated() {
-        console.log("compoennt updated")
-    },
+    methods: {
+        startTimer(){
+            this.timer = setInterval(() => {
+                this.reactionTime += 10
+            },10)
+        },
+        stopTimer(){
+            clearInterval(this.timer)
+            console.log("timer",this.reactionTime)
+        }
+    }
 }
 </script>
 
@@ -51,12 +61,8 @@ p{
     background: red;
 }
 
-.isWaiting{
-    background: rgb(196, 163, 63);
-}
-
 .isReady{
-    background: rgb(196, 163, 63);
+    background: rgb(85, 196, 63);
 }
 
 
